@@ -1,6 +1,10 @@
+import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { MapMarker } from '@angular/google-maps';
+import { Observable } from 'rxjs';
 import { StarRatingColor } from './star-rating/star-rating.component';
+import { Taquerias } from './taquerias';
+import { TaqueriasService } from './taquerias.service';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +30,22 @@ export class AppComponent implements OnInit {
   }
   markers:any[] = [];
 
+  taquerias!:Taquerias[];
+
+  constructor(private taqueriasService:TaqueriasService){}
+
+
+  getTaquerias(): void {
+    this.taqueriasService.getTaquerias().subscribe(taquerias => this.taquerias=taquerias);
+    console.log(this.taquerias);
+  }
+  getTaqueria():void{
+
+  }
+  updateTaqueria():void{}
+  deleteTaqueria():void{}
+  addTaqueria():void{}
+
   ngOnInit(): void {
     this.center = {
       lat: 32.638111,
@@ -37,7 +57,7 @@ export class AppComponent implements OnInit {
         lng: position.coords.longitude
       }
     })
-
+    this.getTaquerias();
   }
 
   click(event: google.maps.MapMouseEvent) {
@@ -73,5 +93,19 @@ export class AppComponent implements OnInit {
     this.rating = rating;
   }
 
+  displayedColumns: string[] = ['nombre', 'calidad', 'precio', 'comentario','pagina_fb'];
+  dataSource = new TaqueriasDataSource(this.taqueriasService);
 
 }
+
+
+export class TaqueriasDataSource extends DataSource<Taquerias> {
+  constructor(private taqueriasService: TaqueriasService) {
+    super();
+  }
+  connect(): Observable<Taquerias[]> {
+    return this.taqueriasService.getTaquerias();
+  }
+  disconnect() {}
+}
+

@@ -8,6 +8,33 @@
 </head>
 <body>
 
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let taque"> {{taque.nombre}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="precio">
+      <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+      <mat-cell *matCellDef="let taque"> {{taque.precio}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="calidad">
+      <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+      <mat-cell *matCellDef="let taque"> {{taque.precio}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="comentario">
+      <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+      <mat-cell *matCellDef="let taque"> {{taque.precio}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="pagina_fb">
+      <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+      <mat-cell *matCellDef="let taque"> {{taque.precio}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+
+
   <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>

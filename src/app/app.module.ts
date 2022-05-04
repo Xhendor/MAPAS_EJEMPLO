@@ -13,6 +13,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { RouterModule, Routes } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { routing } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { routing } from './app-routing.module';
     MatTooltipModule,
     MatSliderModule,
     RouterModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule,MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
