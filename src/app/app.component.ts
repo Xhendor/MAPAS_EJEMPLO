@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MapMarker } from '@angular/google-maps';
+import { StarRatingColor } from './star-rating/star-rating.component';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,11 @@ import { MapMarker } from '@angular/google-maps';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  rating:number = 3;
+  starCount:number = 5;
+  starColor:StarRatingColor = StarRatingColor.accent;
+  starColorP:StarRatingColor = StarRatingColor.primary;
+  starColorW:StarRatingColor = StarRatingColor.warn;
   title = 'MAPAS_EJEMPLO';
   zoom = 12
   center!: google.maps.LatLngLiteral
@@ -60,6 +66,11 @@ export class AppComponent implements OnInit {
       title: 'Marker title ' + (this.markers.length + 1),
       options: { animation: google.maps.Animation.BOUNCE },
     })
+  }
+
+  onRatingChanged(rating:number){
+    console.log(rating);
+    this.rating = rating;
   }
 
 
