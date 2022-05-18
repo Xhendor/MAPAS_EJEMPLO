@@ -1,5 +1,4 @@
 export interface Taquerias{
-
   id_taquerias:number;
   nombre:string;
   calidad:number;
@@ -8,5 +7,4 @@ export interface Taquerias{
   latitud:number;
   longitud:number;
   pagina_fb:string;
-
 }

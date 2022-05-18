@@ -57,15 +57,19 @@
   width="100%"
   [zoom]="zoom"
   [center]="center"
-  [options]="options">
+  [options]="options"
+  >
   <map-marker
+  #markerElem
   *ngFor="let marker of markers"
   [position]="marker.position"
   [label]="marker.label"
   [title]="marker.title"
   [options]="marker.options"
+  (mapClick)="openInfo(marker,marker.info)"
 >
 </map-marker>
+<map-info-window>{{ infoContent }}</map-info-window>
 
   </google-map>
   <button (click)="zoomIn()">Zoom in</button>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MapMarker } from '@angular/google-maps';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Observable } from 'rxjs';
 import { StarRatingColor } from './star-rating/star-rating.component';
 import { Taquerias } from './taquerias';
@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
     minZoom: 8,
   }
   markers:any[] = [];
+  infoContent = '';
 
   dataSource!: MatTableDataSource<Taquerias>;
 
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MapInfoWindow, { static: false }) info!: MapInfoWindow
 
   // ngAfterViewInit() {
   //   this.dataSource.paginator = this.paginator;
@@ -57,7 +59,25 @@ export class AppComponent implements OnInit {
   //dataSource = new TaqueriasDataSource(this.taqueriasService);
 
   getTaquerias(): void {
-    this.taqueriasService.getTaquerias().subscribe(taquerias => this.taquerias=taquerias);
+    this.taqueriasService.getTaquerias().subscribe(taquerias => {this.taquerias=taquerias;
+this.taquerias.forEach(element => {
+  this.markers.push({
+    position: {
+      lat: element.latitud,
+      lng: element.longitud,
+    },
+    label: {
+      color: 'red',
+      text: element.nombre,
+    },
+    info: element.nombre,
+    title: element.nombre,
+    options: { animation: google.maps.Animation.BOUNCE },
+  })
+});
+
+
+    });
     console.log(this.taquerias);
 
   }
@@ -80,6 +100,9 @@ export class AppComponent implements OnInit {
       }
     })
     this.getTaquerias();
+
+
+
 
 
   }
@@ -112,6 +135,12 @@ export class AppComponent implements OnInit {
     })
   }
 
+
+  openInfo(marker: MapMarker, content:any) {
+    this.infoContent = content
+    this.info.open(marker)
+  }
+
   onRatingChanged(rating:number){
     console.log(rating);
     this.rating = rating;
@@ -132,6 +161,12 @@ export class AppComponent implements OnInit {
     }
   }
 
+  openDialog(element:any): void {
+    element = element;
+    console.log(element);
+
+
+  }
 
 }
 
