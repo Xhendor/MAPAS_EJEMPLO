@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { routing } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {MatTableModule} from '@angular/material/table';
     MatSliderModule,
     RouterModule,
     MatCardModule,
-    HttpClientModule,MatTableModule
+    HttpClientModule,MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
